@@ -1,7 +1,10 @@
 package com.kbtg.techkamp.week1.shop.services;
 
-import com.kbtg.techkamp.week1.shop.models.User;
+import com.kbtg.techkamp.week1.shop.models.entities.Cart;
+import com.kbtg.techkamp.week1.shop.models.entities.CartItem;
+import com.kbtg.techkamp.week1.shop.models.entities.User;
 import com.kbtg.techkamp.week1.shop.models.exceptions.LoginFailedException;
+import com.kbtg.techkamp.week1.shop.repositories.CartRepository;
 import com.kbtg.techkamp.week1.shop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,12 +41,21 @@ public class UserService {
         return tokenService.decodeTokenToUsername(token);
     }
 
+    public void register(User user) {
+        Cart cart = new Cart();
+        user.setCart(cart);
+        userRepository.save(user);
+    }
+
     public Optional<User> getUserInfo(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public void register(User user) {
-//        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+    public Optional<User> getUserInfo(int userId) {
+        return userRepository.findById(userId);
+    }
+
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 }

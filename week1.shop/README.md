@@ -17,6 +17,7 @@ This flow with breifly summarize the flow that user will be using
     ```json
     {
     "token": "Bearer TOKEN"
+    "userid": 1
     }
     ```
 
@@ -29,21 +30,20 @@ This flow with breifly summarize the flow that user will be using
     {
     "products": [
         {
-        "id": 1,
-        "name": "shoes 1",
-        "quantity": 2,
-        "price": 10.00
-        }
-    ],
-    "products": [
+            "id": 1,
+            "name": "shoes 1",
+            "quantity": 2,
+            "price": 10.00,
+            "image": "a.jpg"
+        },
         {
-        "id": 2,
-        "name": "this is the best SHOES",
-        "quantity": 1,
-        "price": 500.00
+            "id": 2,
+            "name": "this is the best SHOES",
+            "quantity": 1,
+            "price": 500.00
+            "image": "b.jpg"
         }
-    ],
-    }
+    ]
     ```
 
 
@@ -79,7 +79,7 @@ This flow with breifly summarize the flow that user will be using
 
 **5. select basket**
 - request
-  - GET /basket?user=username
+  - GET /basket?userid=userid
 - response
     ```json
     {
@@ -99,7 +99,7 @@ This flow with breifly summarize the flow that user will be using
 **7. user use default address for shipping (Assuming user set his/her address before hand in other api section**
 
 - request
-  - GET /address?user=username
+  - GET /address?userid=userid
 - response
     ```json
     {
@@ -119,7 +119,7 @@ This flow with breifly summarize the flow that user will be using
   - POST /payment
     ```json
     {
-        "user": "username",
+        "userid": "userid",
         "fillName": "address",
         "cardNumber":"1111222233334444",
         "expiry": "02/25",
@@ -139,7 +139,7 @@ This flow with breifly summarize the flow that user will be using
   - POST /receipt
     ```json
     {
-        "username": "username",
+        "userid": 1,
         "paymentId": 1
     }
     ```
@@ -149,12 +149,17 @@ This flow with breifly summarize the flow that user will be using
     "payer": "John Doe",
     "products": [
         {
-        "name": "POCA SHOE NMD Sneakers Fashion - Sport Unisex - PSN-Black/White",
+        "name": "Shoe 1",
         "quantity": 1
         }
     ],
     "amount": 399.00,
-    "address": "Somewhere in Thailand",
-    "cardNumber": "1111222233334444"
+    "address": "addr",
+    "district": "district",
+    "provice": "province",
     }
     ```
+
+### Auxiliary API
+- add address
+  - for user to add his address

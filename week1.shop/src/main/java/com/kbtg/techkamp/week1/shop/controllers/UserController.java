@@ -1,12 +1,11 @@
 package com.kbtg.techkamp.week1.shop.controllers;
 
-import com.kbtg.techkamp.week1.shop.models.User;
-import com.kbtg.techkamp.week1.shop.models.requests.ApplicationUser;
+import com.kbtg.techkamp.week1.shop.models.entities.User;
+import com.kbtg.techkamp.week1.shop.models.exceptions.UserNotFoundException;
 import com.kbtg.techkamp.week1.shop.models.requests.LoginRequest;
 import com.kbtg.techkamp.week1.shop.models.responses.LoginSuccessResponse;
 import com.kbtg.techkamp.week1.shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,8 +27,13 @@ public class UserController {
     }
 
     @GetMapping("/user/info")
-    public User signUp(@RequestParam String username) {
-        return userService.getUserInfo(username).orElseThrow(() -> new RuntimeException("shit"));
+    public User getUserInfo(@RequestParam String username) {
+        return userService.getUserInfo(username).orElseThrow(() -> new UserNotFoundException());
+    }
+
+    @GetMapping("/user/id")
+    public User getUserInfo(@RequestParam int userId) {
+        return userService.getUserInfo(userId).orElseThrow(() -> new UserNotFoundException());
     }
 
     @GetMapping("/validate-token")
