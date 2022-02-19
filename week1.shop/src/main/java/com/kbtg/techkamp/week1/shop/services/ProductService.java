@@ -62,4 +62,8 @@ public class ProductService {
             productRepository.save(product);
         }
     }
+
+    public List<Product> searchProducts(String keyword) {
+        return productRepository.findByNameContaining(keyword);
+    }
 }

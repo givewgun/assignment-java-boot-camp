@@ -16,7 +16,7 @@ This flow with breifly summarize the flow that user will be using
   - TOKEN will consist of username and id
     ```json
     {
-    "token": "Bearer TOKEN"
+    "token": "Bearer TOKEN",
     "userid": 1
     }
     ```
@@ -24,7 +24,7 @@ This flow with breifly summarize the flow that user will be using
 
 **2. search product with keyword: `shoes` will be partially or exactly matched and return the following json**
 - request
-  - GET /products?name=shoe
+  - GET /products?keyword=shoe
 - response
     ```json
     {
@@ -54,19 +54,21 @@ This flow with breifly summarize the flow that user will be using
 - response
     ```json
     {
-        "name": "shoes 1",
-        "quantity": 2,
-        "price": 10.00
+        "id": 1,
+        "name": "shoe1",
+        "price": 100.0,
+        "quantity": 1,
+        "image": "img.jpg"
     }
     ```
 
-**4. add to basket**
+**4. add to cart**
 - request
-  - POST /basket
+  - POST /cart/items
     ```json
     {
-        "user": "username",
-        "productid": 1
+        "userId": 1,
+        "productid": 1,
         "quantity": 1
     }
     ```
@@ -77,9 +79,26 @@ This flow with breifly summarize the flow that user will be using
     }
     ```
 
-**5. select basket**
+**5. delete from cart**
 - request
-  - GET /basket?userid=userid
+  - POST /cart/items
+    ```json
+    {
+        "userId": 1,
+        "productid": 1,
+        "quantity": 1
+    }
+    ```
+- response
+    ```json
+    {
+        "message": "add to basket successful"
+    }
+    ```
+
+**6. select all cart items**
+- request
+  - GET /cart/items?userId=1
 - response
     ```json
     {
@@ -94,9 +113,9 @@ This flow with breifly summarize the flow that user will be using
     }
     ```
 
-**6. checkout**
+**7. checkout**
 
-**7. user use default address for shipping (Assuming user set his/her address before hand in other api section**
+**8. user use default address for shipping (Assuming user set his/her address before hand in other api section**
 
 - request
   - GET /address?userid=userid
@@ -112,9 +131,9 @@ This flow with breifly summarize the flow that user will be using
     }
     ```
 
-**8. process with default address get from server**
+**9. process with default address get from server**
 
-**9. user add payment info (credit card) and pay**
+**10. user add payment info (credit card) and pay**
 - request
   - POST /payment
     ```json
@@ -134,7 +153,7 @@ This flow with breifly summarize the flow that user will be using
     }
     ```
 
-**10. user view receipt after paid**
+**11. user view receipt after paid**
 - request
   - POST /receipt
     ```json
