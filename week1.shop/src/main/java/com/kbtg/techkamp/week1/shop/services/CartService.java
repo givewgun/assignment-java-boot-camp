@@ -37,7 +37,7 @@ public class CartService {
             Set<CartItem> cartItems = cart.getItems();
             int totalPrice = 0;
             for (CartItem item: cartItems) {
-                totalPrice += productService.getPrice(item.getProductId());
+                totalPrice += productService.getPrice(item.getProductId()) * item.getQuantity();
             }
             return new CartResponse(cart.getId(), cartItems, totalPrice);
         }
