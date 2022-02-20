@@ -134,6 +134,7 @@ This flow with breifly summarize the flow that user will be using
         "userId": 1,
         "address": "address",
         "phone": "0800000000",
+        "totalPrices": 200.0,
         "items": [
             {
                 "id": 9,
@@ -164,6 +165,7 @@ This flow with breifly summarize the flow that user will be using
         "userId": 1,
         "address": "address",
         "phone": "0800000000",
+        "totalPrices": 200.0,
         "items": [
             {
                 "id": 9,
