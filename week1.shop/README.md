@@ -3,9 +3,25 @@
 ##  User flow summary
 This flow with breifly summarize the flow that user will be using
 
+
+**1. signup with username: `user` password: `password`**
+- request
+  - POST /signup
+    ```json
+    {
+        "user":"user",
+        "password":"password"
+    }
+    ```
+- response
+  - 
+    ```string
+    Signup successful
+    ```
+
 **1. login with username: `user` password: `password`**
 - request
-  - POST /user/login
+  - POST /login
     ```json
     {
         "user":"user",
@@ -114,7 +130,7 @@ This flow with breifly summarize the flow that user will be using
     }
     ```
 
-**7. user add payment info (credit card) and address and pay for all items in cart**
+**7. (Checkout & Pay) user add payment info (credit card) and address and pay for all items in cart**
 - request
   - POST /payment
   - With Header : `Authorization: Bearer {username},{userid}`
