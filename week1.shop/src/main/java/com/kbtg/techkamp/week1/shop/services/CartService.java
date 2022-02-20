@@ -12,6 +12,8 @@ import com.kbtg.techkamp.week1.shop.repositories.CartItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -35,7 +37,7 @@ public class CartService {
             Set<CartItem> cartItems = cart.getItems();
             int totalPrice = 0;
             for (CartItem item: cartItems) {
-                totalPrice += item.getQuantity() * productService.getPrice(item.getProductId());
+                totalPrice += productService.getPrice(item.getProductId());
             }
             return new CartResponse(cart.getId(), cartItems, totalPrice);
         }
@@ -99,6 +101,11 @@ public class CartService {
             throw new CartItemNotFoundException();
         }
         throw new UserNotFoundException();
+    }
+
+    @Transactional
+    public void clearCart(int cartId) {
+        cartItemRepository.deleteAllByCartId(cartId);
     }
 
     public void setUserService(UserService userService) {

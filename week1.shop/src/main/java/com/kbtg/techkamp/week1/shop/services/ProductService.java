@@ -29,7 +29,7 @@ public class ProductService {
     }
 
     public Double getPrice(int productId) {
-        return productRepository.findById(productId).map(p -> p.getPrice()).orElseThrow(() -> new ProductNotFoundException());
+        return productRepository.findById(productId).map(p -> p.getPrice() * p.getQuantity()).orElseThrow(() -> new ProductNotFoundException());
     }
 
     public boolean isProductAvailable(int productId, int quantity) {

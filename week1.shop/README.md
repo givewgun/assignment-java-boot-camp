@@ -113,72 +113,73 @@ This flow with breifly summarize the flow that user will be using
     }
     ```
 
-**7. checkout**
-
-**8. user use default address for shipping (Assuming user set his/her address before hand in other api section**
-
-- request
-  - GET /address?userid=userid
-- response
-    ```json
-    {
-        "fullName": "John Doe",
-        "address": "address",
-        "district":"district",
-        "province": "province",
-        "postCode": 11111,
-        "phone": 0800000000
-    }
-    ```
-
-**9. process with default address get from server**
-
-**10. user add payment info (credit card) and pay**
+**7. user add payment info (credit card) and address and pay for all items in cart**
 - request
   - POST /payment
     ```json
     {
-        "userid": "userid",
-        "fillName": "address",
+        "userid": 1,
+        "fullName": "full name",
         "cardNumber":"1111222233334444",
         "expiry": "02/25",
-        "cvv": 000
+        "cvv": "000",
+        "address": "address",
+        "phone": "0800000000"
     }
     ```
 - response
     ```json
     {
-        "message": "payment successful",
-        "paymentId": 1
+        "id": 8,
+        "userId": 1,
+        "address": "address",
+        "phone": "0800000000",
+        "items": [
+            {
+                "id": 9,
+                "productId": 3,
+                "quantity": 1
+            },
+            {
+                "id": 10,
+                "productId": 4,
+                "quantity": 1
+            },
+            {
+                "id": 11,
+                "productId": 2,
+                "quantity": 1
+            }
+        ]
     }
     ```
 
-**11. user view receipt after paid**
+**8. user view order receipt after paid**
 - request
-  - POST /receipt
-    ```json
-    {
-        "userid": 1,
-        "paymentId": 1
-    }
-    ```
+  - GET /orders?orderId=1
 - response
     ```json
-    {
-    "payer": "John Doe",
-    "products": [
-        {
-        "name": "Shoe 1",
-        "quantity": 1
-        }
-    ],
-    "amount": 399.00,
-    "address": "addr",
-    "district": "district",
-    "provice": "province",
+     {
+        "id": 8,
+        "userId": 1,
+        "address": "address",
+        "phone": "0800000000",
+        "items": [
+            {
+                "id": 9,
+                "productId": 3,
+                "quantity": 1
+            },
+            {
+                "id": 10,
+                "productId": 4,
+                "quantity": 1
+            },
+            {
+                "id": 11,
+                "productId": 2,
+                "quantity": 1
+            }
+        ]
     }
     ```
-
-### Auxiliary API
-- add address
-  - for user to add his address

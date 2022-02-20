@@ -54,4 +54,11 @@ public class ControllerAdvice {
         return new FailedResponse(e.getMessage());
     }
 
+    @ExceptionHandler(OrderNotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public FailedResponse handleOrderNotFoundException(OrderNotFoundException e) {
+        return new FailedResponse(e.getMessage());
+    }
+
 }
