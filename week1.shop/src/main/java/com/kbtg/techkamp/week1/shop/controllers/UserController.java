@@ -26,12 +26,7 @@ public class UserController {
         return "Signup successful";
     }
 
-    @GetMapping("/user/info")
-    public User getUserInfo(@RequestParam String username) {
-        return userService.getUserInfo(username).orElseThrow(() -> new UserNotFoundException());
-    }
-
-    @GetMapping("/user/id")
+    @GetMapping("/users")
     public User getUserInfo(@RequestParam int userId) {
         return userService.getUserInfo(userId).orElseThrow(() -> new UserNotFoundException());
     }

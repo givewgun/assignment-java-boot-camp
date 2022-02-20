@@ -20,6 +20,23 @@ public class User{
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private Cart cart;
 
+	public User() {
+	}
+
+
+	public User(String username, String password) {
+		this.password = password;
+		this.username = username;
+		this.cart = new Cart();
+	}
+
+	public User(int id, String username, String password) {
+		this.id = id;
+		this.password = password;
+		this.username = username;
+		this.cart = new Cart();
+	}
+
 	public Cart getCart() {
 		return cart;
 	}

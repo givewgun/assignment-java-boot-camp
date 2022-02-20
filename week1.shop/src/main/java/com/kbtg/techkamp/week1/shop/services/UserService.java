@@ -38,6 +38,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public void setUserTokenService(UserTokenService userTokenService) {
+        this.tokenService = userTokenService;
+    }
+
     public String getUsernameFromToken(String token) {
         return tokenService.decodeTokenToUsername(token);
     }
@@ -53,7 +57,7 @@ public class UserService {
 
     }
 
-    public boolean isUsernameExist(String username) {
+    private boolean isUsernameExist(String username) {
         return userRepository.findByUsername(username).isPresent();
     }
 
@@ -68,4 +72,5 @@ public class UserService {
     public User saveUser(User user) {
         return userRepository.save(user);
     }
+
 }
