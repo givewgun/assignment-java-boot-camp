@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
@@ -44,7 +47,12 @@ class CartControllerTest {
         CartResponse expectedResponse = new CartResponse(1, items, 10.00);
         when(cartService.getCartInfo(anyInt())).thenReturn(expectedResponse);
 
-        CartResponse result = restTemplate.getForObject("/cart/items?userId=1", CartResponse.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer user,1");
+
+        HttpEntity<Void> entity = new HttpEntity<>(headers);
+
+        CartResponse result = restTemplate.exchange("/cart/items?userId=1", HttpMethod.GET, entity, CartResponse.class).getBody();
 
         assertEquals(1, result.getId());
         assertEquals(1, result.getCartItems().size());
@@ -57,7 +65,15 @@ class CartControllerTest {
         when(cartService.addProductToCart(any(CartItemRequest.class))).thenReturn(user);
 
         CartItemRequest request = new CartItemRequest();
-        SuccessResponse result = restTemplate.postForObject("/cart/items/add", request, SuccessResponse.class);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer user,1");
+
+        HttpEntity<CartItemRequest> entity = new HttpEntity<>(request, headers);
+
+        SuccessResponse result = restTemplate.exchange("/cart/items/add", HttpMethod.POST, entity, SuccessResponse.class).getBody();
+
+//        SuccessResponse result = restTemplate.postForObject("/cart/items/add", request, SuccessResponse.class);
 
         assertEquals("add product to cart successfully", result.getMessage());
     }
@@ -68,7 +84,13 @@ class CartControllerTest {
         when(cartService.removeProductFromCart(any(CartItemRequest.class))).thenReturn(user);
 
         CartItemRequest request = new CartItemRequest();
-        SuccessResponse result = restTemplate.postForObject("/cart/items/remove", request, SuccessResponse.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer user,1");
+
+        HttpEntity<CartItemRequest> entity = new HttpEntity<>(request, headers);
+
+        SuccessResponse result = restTemplate.exchange("/cart/items/remove", HttpMethod.POST, entity, SuccessResponse.class).getBody();
+
 
         assertEquals("removed product from cart successfully", result.getMessage());
     }

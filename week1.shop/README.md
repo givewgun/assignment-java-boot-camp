@@ -16,7 +16,7 @@ This flow with breifly summarize the flow that user will be using
   - TOKEN will consist of username and id
     ```json
     {
-    "token": "Bearer TOKEN",
+    "token": "Bearer {username},{userid}",
     }
     ```
 
@@ -63,10 +63,10 @@ This flow with breifly summarize the flow that user will be using
 
 **4. add to cart**
 - request
-  - POST /cart/items
+  - POST /cart/items/add
+  - With Header : `Authorization: Bearer {username},{userid}`
     ```json
     {
-        "userId": 1,
         "productid": 1,
         "quantity": 1
     }
@@ -74,16 +74,16 @@ This flow with breifly summarize the flow that user will be using
 - response
     ```json
     {
-        "message": "add to basket successful"
+        "message": "add product to cart successfully"
     }
     ```
 
 **5. delete from cart**
 - request
-  - POST /cart/items
+  - POST /cart/items/remove
+  - With Header : `Authorization: Bearer {username},{userid}`
     ```json
     {
-        "userId": 1,
         "productid": 1,
         "quantity": 1
     }
@@ -91,33 +91,35 @@ This flow with breifly summarize the flow that user will be using
 - response
     ```json
     {
-        "message": "add to basket successful"
+        "message": "removed product from cart successfully"
     }
     ```
 
 **6. select all cart items**
 - request
-  - GET /cart/items?userId=1
+  - GET /cart/items
+  - With Header : `Authorization: Bearer {username},{userid}`
 - response
     ```json
     {
-    "products": [
-        {
-        "name": "shoes 2",
-        "quantity": 1,
-        "price": 10.00
-        }
-    ],
-    "totalPrice": 10.00
+        "id": 1,
+        "cartItems": [
+            {
+                "id": 6,
+                "productId": 2,
+                "quantity": 1
+            }
+        ],
+        "totalPrice": 0.0
     }
     ```
 
 **7. user add payment info (credit card) and address and pay for all items in cart**
 - request
   - POST /payment
+  - With Header : `Authorization: Bearer {username},{userid}`
     ```json
     {
-        "userid": 1,
         "fullName": "full name",
         "cardNumber":"1111222233334444",
         "expiry": "02/25",
@@ -157,6 +159,7 @@ This flow with breifly summarize the flow that user will be using
 **8. user view order receipt after paid**
 - request
   - GET /orders?orderId=1
+  - With Header : `Authorization: Bearer {username},{userid}`
 - response
     ```json
      {

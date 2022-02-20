@@ -28,7 +28,7 @@ class UserServiceTest {
 
     @Test
     void login() {
-        String expectedToken = "Bearer username 1";
+        String expectedToken = "Bearer username,1";
         User user = new User(1,"user", "password");
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(user));
         when(tokenService.generateTokenFromUsername(anyString(), anyInt())).thenReturn(expectedToken);
@@ -44,7 +44,7 @@ class UserServiceTest {
     @Test
     void register() {
 
-        String expectedToken = "Bearer username 1";
+        String expectedToken = "Bearer username,1";
         User user = new User(1,"user", "password");
         when(userRepository.findByUsername(anyString())).thenReturn(Optional.empty());
         when(tokenService.generateTokenFromUsername(anyString(), anyInt())).thenReturn(expectedToken);

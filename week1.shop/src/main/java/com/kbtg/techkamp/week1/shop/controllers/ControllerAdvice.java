@@ -21,7 +21,7 @@ public class ControllerAdvice {
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public FailedResponse handleUserNotFoundException(LoginFailedException e) {
+    public FailedResponse handleUserNotFoundException(UserNotFoundException e) {
         return new FailedResponse(e.getMessage());
     }
 
@@ -30,6 +30,13 @@ public class ControllerAdvice {
     @ResponseBody
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public FailedResponse handleLoginFailedException(LoginFailedException e) {
+        return new FailedResponse(e.getMessage());
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public FailedResponse handleAuthorizationException(AuthorizationException e) {
         return new FailedResponse(e.getMessage());
     }
 
