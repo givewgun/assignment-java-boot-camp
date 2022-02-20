@@ -4,7 +4,7 @@
 This flow with breifly summarize the flow that user will be using
 
 
-**1. signup with username: `user` password: `password`**
+**0. signup with username: `user` password: `password`**
 - request
   - POST /signup
     ```json
