@@ -27,13 +27,13 @@ public class CartController {
         return cartService.getCartInfo(userId);
     }
 
-    @PostMapping(value = "/cart/items")
+    @PostMapping(value = "/cart/items/add")
     public SuccessResponse addProductToCart(@RequestBody CartItemRequest request) {
         cartService.addProductToCart(request);
         return new SuccessResponse("add product to cart successfully");
     }
 
-    @DeleteMapping(value = "/cart/items")
+    @PostMapping(value = "/cart/items/remove")
     public SuccessResponse removeProductFromCart(@RequestBody CartItemRequest request) {
         cartService.removeProductFromCart(request);
         return new SuccessResponse("removed product from cart successfully");

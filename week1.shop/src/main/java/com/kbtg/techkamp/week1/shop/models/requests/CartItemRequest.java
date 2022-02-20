@@ -5,6 +5,16 @@ public class CartItemRequest {
     private int productId;
     private int quantity;
 
+
+    public CartItemRequest() {
+    }
+
+    public CartItemRequest(int userId, int productId, int quantity) {
+        this.userId = userId;
+        this.productId = productId;
+        this.quantity = quantity;
+    }
+
     public int getUserId() {
         return userId;
     }

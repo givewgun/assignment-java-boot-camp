@@ -100,4 +100,16 @@ public class CartService {
         }
         throw new UserNotFoundException();
     }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void setCartItemRepository(CartItemRepository cartItemRepository) {
+        this.cartItemRepository = cartItemRepository;
+    }
+
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
+    }
 }
