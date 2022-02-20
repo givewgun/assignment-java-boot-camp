@@ -17,7 +17,6 @@ This flow with breifly summarize the flow that user will be using
     ```json
     {
     "token": "Bearer TOKEN",
-    "userid": 1
     }
     ```
 
