@@ -4,6 +4,7 @@ import com.kbtg.techkamp.week1.shop.models.entities.Cart;
 import com.kbtg.techkamp.week1.shop.models.entities.CartItem;
 import com.kbtg.techkamp.week1.shop.models.entities.User;
 import com.kbtg.techkamp.week1.shop.models.exceptions.LoginFailedException;
+import com.kbtg.techkamp.week1.shop.models.exceptions.UserAlreadyExistException;
 import com.kbtg.techkamp.week1.shop.repositories.CartRepository;
 import com.kbtg.techkamp.week1.shop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,18 @@ public class UserService {
     }
 
     public void register(User user) {
-        Cart cart = new Cart();
-        user.setCart(cart);
-        userRepository.save(user);
+        if(!isUsernameExist(user.getUsername())){
+            Cart cart = new Cart();
+            user.setCart(cart);
+            userRepository.save(user);
+        } else {
+            throw new UserAlreadyExistException();
+        }
+
+    }
+
+    public boolean isUsernameExist(String username) {
+        return userRepository.findByUsername(username).isPresent();
     }
 
     public Optional<User> getUserInfo(String username) {

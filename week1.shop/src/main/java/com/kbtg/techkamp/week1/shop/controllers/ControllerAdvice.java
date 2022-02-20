@@ -11,10 +11,17 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class ControllerAdvice {
 
+    @ExceptionHandler(UserAlreadyExistException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+    public FailedResponse handleUserAlreadyExistException(UserAlreadyExistException e) {
+        return new FailedResponse(e.getMessage());
+    }
+
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public FailedResponse UserNotFoundException(LoginFailedException e) {
+    public FailedResponse handleUserNotFoundException(LoginFailedException e) {
         return new FailedResponse(e.getMessage());
     }
 
