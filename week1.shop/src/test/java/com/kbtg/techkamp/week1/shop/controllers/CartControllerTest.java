@@ -73,8 +73,6 @@ class CartControllerTest {
 
         SuccessResponse result = restTemplate.exchange("/cart/items/add", HttpMethod.POST, entity, SuccessResponse.class).getBody();
 
-//        SuccessResponse result = restTemplate.postForObject("/cart/items/add", request, SuccessResponse.class);
-
         assertEquals("add product to cart successfully", result.getMessage());
     }
 

@@ -9,6 +9,19 @@ public class OrderRequest{
 	private int userid;
 	private String cardNumber;
 
+	public OrderRequest() {
+	}
+
+	public OrderRequest(String cvv, String address, String phone, String fullName, String expiry, int userid, String cardNumber) {
+		this.cvv = cvv;
+		this.address = address;
+		this.phone = phone;
+		this.fullName = fullName;
+		this.expiry = expiry;
+		this.userid = userid;
+		this.cardNumber = cardNumber;
+	}
+
 	public void setCvv(String cvv){
 		this.cvv = cvv;
 	}

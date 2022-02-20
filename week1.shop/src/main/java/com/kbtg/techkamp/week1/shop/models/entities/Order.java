@@ -37,6 +37,24 @@ public class Order {
         this.items = new HashSet<>();
     }
 
+    public Order(int id, int userId, String address, String phone, Double totalPrices, Set<OrderItem> items) {
+        this.id = id;
+        this.userId = userId;
+        this.address = address;
+        this.phone = phone;
+        this.totalPrices = totalPrices;
+        this.items = items;
+    }
+
+    public Order(int userId, String address, String phone, Double totalPrices, Set<OrderItem> items) {
+        this.userId = userId;
+        this.address = address;
+        this.phone = phone;
+        this.totalPrices = totalPrices;
+        this.items = items;
+    }
+
+
     public Set<OrderItem> getItems() {
         return items;
     }

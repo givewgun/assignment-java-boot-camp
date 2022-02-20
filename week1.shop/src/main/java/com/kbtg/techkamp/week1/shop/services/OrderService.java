@@ -2,7 +2,6 @@ package com.kbtg.techkamp.week1.shop.services;
 
 import com.kbtg.techkamp.week1.shop.models.entities.*;
 import com.kbtg.techkamp.week1.shop.models.exceptions.InvalidOrderException;
-import com.kbtg.techkamp.week1.shop.models.exceptions.UserNotFoundException;
 import com.kbtg.techkamp.week1.shop.models.requests.OrderRequest;
 import com.kbtg.techkamp.week1.shop.models.requests.PaymentRequest;
 import com.kbtg.techkamp.week1.shop.models.responses.CartResponse;
@@ -71,4 +70,15 @@ public class OrderService {
         //process / call expernal api / separate to payment service etc
     }
 
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void setCartService(CartService cartService) {
+        this.cartService = cartService;
+    }
+
+    public void setOrderRepository(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 }

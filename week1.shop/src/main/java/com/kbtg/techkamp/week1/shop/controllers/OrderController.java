@@ -26,15 +26,15 @@ public class OrderController {
 
 
     @PostMapping(value = "/orders")
-    public Order orderProductsInCart(@RequestHeader("Authorization") String token,
-                                     @RequestBody OrderRequest request) {
+    public Order placeOrder(@RequestHeader("Authorization") String token,
+                            @RequestBody OrderRequest request) {
         int userId = tokenService.decodeTokenToUserId(token);
         request.setUserid(userId);
         return orderService.processOrder(request);
     }
 
     @GetMapping(value = "/orders")
-    public Order orderProductsInCart(@RequestHeader("Authorization") String token,
+    public Order getOrderById(@RequestHeader("Authorization") String token,
                                      @RequestParam int orderId) {
         int userId = tokenService.decodeTokenToUserId(token);
         return orderService.getOrderById(orderId).orElseThrow(() -> new OrderNotFoundException());
