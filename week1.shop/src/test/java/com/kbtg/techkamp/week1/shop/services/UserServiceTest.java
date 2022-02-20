@@ -57,5 +57,5 @@ class UserServiceTest {
         verify(userRepository, times(1)).save(user);
 
     }
-    
+
 }

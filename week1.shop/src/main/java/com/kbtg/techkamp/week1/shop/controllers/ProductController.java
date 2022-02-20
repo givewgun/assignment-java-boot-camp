@@ -21,13 +21,13 @@ public class ProductController {
 
 
     @GetMapping(value = "/products/all")
-    public ProductsResponse addProductToCart() {
+    public ProductsResponse getAllProducts() {
         List<Product> products = productService.getAllProducts();
         return new ProductsResponse(products);
     }
 
     @GetMapping(value = "/products/{id}")
-    public Product removeProductFromCart(@PathVariable int id) {
+    public Product getProductById(@PathVariable int id) {
         return productService.getProductById(id).orElseThrow(() -> new ProductNotFoundException());
     }
 

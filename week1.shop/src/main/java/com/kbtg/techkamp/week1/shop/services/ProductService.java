@@ -28,10 +28,6 @@ public class ProductService {
         return productRepository.findById(productId);
     }
 
-    public List<Product> removeProduct(int productId) {
-        return productRepository.findAll();
-    }
-
     public Double getPrice(int productId) {
         return productRepository.findById(productId).map(p -> p.getPrice()).orElseThrow(() -> new ProductNotFoundException());
     }
@@ -65,5 +61,9 @@ public class ProductService {
 
     public List<Product> searchProducts(String keyword) {
         return productRepository.findByNameContaining(keyword);
+    }
+
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 }
